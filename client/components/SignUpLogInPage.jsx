@@ -129,7 +129,7 @@ const SignUpLogInPage = () => {
   const [ signUpPassword, setSignUpPassword ] = useState('');
   const [ logInUsername, setLogInUsername ] = useState('');
   const [ logInPassword, setLogInPassword ] = useState('');
-  const [ isSignedIn, setIsSignedIn ] = useState(false);
+  const [ isSignedIn, setIsSignedIn ] = useState(true);
 
 
   const updateSignUpUsername = (input) => {
@@ -208,11 +208,18 @@ const SignUpLogInPage = () => {
     // const { isSignedIn } = this.state.isSignedIn;
     // const { navigate } = this.props.navigate;
     const navigate = useNavigate();
+
+    useEffect(() => {
+      if (isSignedIn === true) navigate('/SayHi');
+    }, [isSignedIn])
+
     return (
       <div>
-        {(isSignedIn === true) ? <div><HomePage /></div> : <div><SignUp /></div>}
+        {/* {(isSignedIn === true) ? <div><HomePage /></div> : <div><SignUp /></div>} */}
+         <div><SignUp /></div>
       </div>
     );
+
     // return (
     //   <div>
     //     {(isSignedIn === true) ? navigate('/') : <div><SignUp /></div>}
