@@ -3,6 +3,8 @@ const path = require('path');
 
 const PORT = 3000;
 
+const router = require('./routes/router');
+
 const app = express();
 
 app.use(express.json());
@@ -20,11 +22,14 @@ if (process.env.NODE_ENV === 'production') {
 //   );
 // });
 
+app.use('/test', router);
+
 app.use((req, res) => {
   res.sendStatus(404);
 });
 
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(500).json(err);
 });
 
