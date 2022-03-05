@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const express = require('express');
 const path = require('path');
 
@@ -14,7 +15,8 @@ router.post('/event', eventController.addEvent, (req, res) => {
   res.sendStatus(200);
 });
 // delete
-router.delete('/event', eventController.deleteEvent, (req, res) => res.status(200).send())
-
+router.delete('/event', eventController.deleteEvent, (req, res) => {
+  res.status(200);
+});
 
 module.exports = router;
