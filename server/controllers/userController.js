@@ -32,7 +32,19 @@ const userController = {
 userController.logIn = (req, res, next) => {
   findUser(req.body.username)
     .then((user) => {
-      if(user) {}
+      if (!user) {
+        return addUser(req.body.username, req.body.password)
+          .then((result) => {
+            res.locals.result = { successful: result };
+            return next();
+          })
+          .catch((e) => next(e));
+      } if (authenticate(user, req.body.password)) {
+        res.locals.result = { successful: true };
+        return next();
+      }
+      res.locals.result = { successful: false };
+      return next();
     })
     .catch((e) => next(e));
 };
@@ -40,7 +52,5 @@ userController.logIn = (req, res, next) => {
 userController.register = (req, res, next) => {
 
 };
-
-userController.
 
 module.exports = userController;
