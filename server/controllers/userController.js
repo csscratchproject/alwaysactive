@@ -63,4 +63,54 @@ userController.signup = (req, res, next) => {
     .catch((e) => next(e));
 };
 
+/*
+* RSVP functions and controllers
+*/
+
+const rsvpExists = (username, eventId) => (
+  new Promise((resolve, reject) => {
+    db.query('SELECT * FROM rsvp WHERE username = $1 AND event_id = $2;', [username, eventId])
+      .then((data) => resolve(data.rows.length > 0))
+      .catch((e) => reject(e));
+  })
+);
+
+const deleteRsvp = (username, eventId) => (
+  new Promise((resolve, reject) => {
+    db.query('DELETE FROM rsvp WHERE username = $1 AND event_id = $2;', [username, eventId])
+      .then(resolve)
+      .catch((e) => reject(e));
+  })
+);
+
+const insertRsvp = (username, eventId) => (
+  new Promise((resolve, reject) => {
+    db.query('INSERT INTO rsvp (username, event_id) VALUES ($1, $2);', [username, eventId])
+      .then(resolve)
+      .catch((e) => reject(e));
+  })
+);
+
+userController.rsvp = (req, res, next) => {
+  rsvpExists(req.body.username, req.body.event_id)
+    .then((exists) => {
+      if (exists) {
+        deleteRsvp(req.body.username, req.body.event_id)
+          .then(() => {
+            res.locals.result = { rsvp: false };
+            return next();
+          })
+          .catch((e) => next(e));
+      } else {
+        insertRsvp(req.body.username, req.body.event_id)
+          .then(() => {
+            res.locals.result = { rsvp: true };
+            return next();
+          })
+          .catch((e) => next(e));
+      }
+    })
+    .catch((e) => next(e));
+};
+
 module.exports = userController;
