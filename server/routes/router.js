@@ -14,6 +14,10 @@ router.post('/user/signup', userController.signup, (req, res) => {
   res.status(200).json(res.locals.result);
 });
 
+router.post('/rsvp', userController.rsvp, (req, res) => {
+  res.status(200).json(res.locals.result);
+});
+
 // add event
 router.post('/event', eventController.addEvent, (req, res) => {
   res.sendStatus(200);
