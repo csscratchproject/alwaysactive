@@ -22,10 +22,13 @@ router.post('/rsvp', userController.rsvp, (req, res) => {
 router.post('/event', eventController.addEvent, (req, res) => {
   res.sendStatus(200);
 });
-// delete
+// delete event
 router.delete('/event', eventController.deleteEvent, (req, res) => {
   res.sendStatus(200);
 });
-// update
+// get events
+router.get('/event', eventController.getEvents, (req, res) => {
+  res.status(200).json(res.locals.events);
+});
 
 module.exports = router;
