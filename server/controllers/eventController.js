@@ -33,7 +33,7 @@ const eventController = {
     );
   },
   getEvents: (req, res, next) => {
-    const sql = 'SELECT * FROM EVENTS';
+    const sql = 'SELECT e.*, COUNT(r._id) FROM events e LEFT JOIN rsvp r ON e._id = r.event_id GROUP BY e._id;';
     db.query(
       sql,
       (err, events) => {
