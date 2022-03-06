@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 const path = require('path');
-const db = require('../models/model.js');
+const db = require('../models/model');
 
 const eventController = {
   addEvent: (req, res, next) => {
@@ -22,12 +22,12 @@ const eventController = {
     );
   },
   deleteEvent: (req, res, next) => {
-    const sql = 'DELETE FROM events WHERE _id = $1;';
+    const sql = 'DELETE FROM events WHERE _id = $1';
     db.query(
       sql,
       [req.body.event_id],
       (err) => {
-        if (err) return next(err);
+        if (err) { return next(err); }
         return next();
       },
     );

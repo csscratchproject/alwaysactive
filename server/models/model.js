@@ -1,12 +1,12 @@
 /* eslint-disable linebreak-style */
 const { Pool } = require('pg');
 
-const pgUrl = ''
+const pgUrl = '';
 
 const pool = new Pool({
   connectionString: pgUrl,
 });
-console.log('connected')
+console.log('connected');
 
 pool.query(`CREATE TABLE IF NOT EXISTS users (
   username VARCHAR PRIMARY KEY,

@@ -29,7 +29,24 @@ const authenticate = (user, password) => {
 const userController = {
 };
 
-userController.logIn = (req, res, next) => {
+userController.login = (req, res, next) => {
+  findUser(req.body.username)
+    .then((user) => {
+      if (user) {
+        if (authenticate(user, req.body.password)) {
+          res.locals.result = { successful: true };
+          return next();
+        }
+        res.locals.result = { successful: false };
+        return next();
+      }
+      res.locals.result = { successful: false };
+      return next();
+    })
+    .catch((e) => next(e));
+};
+
+userController.signup = (req, res, next) => {
   findUser(req.body.username)
     .then((user) => {
       if (!user) {
@@ -39,18 +56,11 @@ userController.logIn = (req, res, next) => {
             return next();
           })
           .catch((e) => next(e));
-      } if (authenticate(user, req.body.password)) {
-        res.locals.result = { successful: true };
-        return next();
       }
       res.locals.result = { successful: false };
       return next();
     })
     .catch((e) => next(e));
-};
-
-userController.register = (req, res, next) => {
-
 };
 
 module.exports = userController;
