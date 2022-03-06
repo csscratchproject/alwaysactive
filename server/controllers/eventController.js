@@ -32,6 +32,21 @@ const eventController = {
       },
     );
   },
+  getEvents: (req, res, next) => {
+    const sql = 'SELECT * FROM EVENTS';
+    db.query(
+      sql,
+      (err, events) => {
+        if (err) { return next(err); }
+        res.locals.events = events.rows;
+        return next();
+      },
+    );
+  },
+};
+
+module.exports = eventController;
+
 //   updateEvent: (req, res, next) => {
 //     const sql = `UPDATE events SET ${req.body.new} WHERE ${req.body.event_id};`;
 //     db.query(sql, (err) => {
@@ -40,6 +55,3 @@ const eventController = {
 //       return next();
 //     });
 //   },
-};
-
-module.exports = eventController;
