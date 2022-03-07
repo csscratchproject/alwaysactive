@@ -7,14 +7,14 @@ function SignUp(props) {
       <h1>Sign Up</h1>
       <div>
         <input
-          onChange={(e) => {props.updateUsername(e.target.value)}}
-          value={props.username}
+          onChange={(e) => {props.updateSignUpUsername(e.target.value)}}
+          value={props.signUpUsername}
           placeholder='Username'
           type='text'
         />
         <input
-          onChange={(e) => {props.updatePassword(e.target.value)}}
-          value={props.password}
+          onChange={(e) => {props.updateSignUpPassword(e.target.value)}}
+          value={props.signUpPassword}
           placeholder='Password'
           type='text'
         />

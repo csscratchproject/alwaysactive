@@ -2,10 +2,7 @@ import React, { Component, useState } from 'react';
 import { render } from 'react-dom';
 import SideBarContainer from './SideBarContainer';
 import EventsContainer from './EventsContainer';
-import SignUpLogInButton from '../components/SignUpLogInButton';
-import SignUpLogInPage from '../components/SignUpLogInPage';
 import { useLocation } from 'react-router-dom';
-
 
 // function HomePage(props) {
 //   return (
@@ -19,7 +16,9 @@ import { useLocation } from 'react-router-dom';
 //   );
 // }
 
-function HomePage() {
+function HomePage(props) {
+  const { state } = useLocation();
+  console.log(state);
   return (
     <div>
       {/* <SignUpLogInButton /> */}

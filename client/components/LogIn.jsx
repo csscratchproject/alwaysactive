@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-function SignUp(props) {
+function LogIn(props) {
   return (
     <div>
       <h1>Log In</h1>
       <div>
         <input
-          onChange={(e) => {props.updateUsername(e.target.value)}}
-          value={props.username}
+          onChange={(e) => {props.updateLogInUsername(e.target.value)}}
+          value={props.logInUsername}
           placeholder='Username'
           type='text'
         />
         <input
-          onChange={(e) => {props.updatePassword(e.target.value)}}
-          value={props.password}
+          onChange={(e) => {props.updateLogInPassword(e.target.value)}}
+          value={props.logInPassword}
           placeholder='Password'
           type='text'
         />
         <div>
-          <button onClick={() => {props.saveUser()}}>
-            Sign Up
+          <button onClick={() => {props.logIn()}}>
+            Log In
           </button>
         </div>
       </div>
@@ -28,4 +28,4 @@ function SignUp(props) {
   )
 };
 
-export default SignUp;
+export default LogIn;

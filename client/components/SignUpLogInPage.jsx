@@ -13,86 +13,105 @@ function SignUpLogInPage(props) {
   const [signUpPassword, setSignUpPassword] = useState('');
   const [logInUsername, setLogInUsername] = useState('');
   const [logInPassword, setLogInPassword] = useState('');
-  // const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
+  const { state } = useLocation();
+
+  const navigate = useNavigate();
+
+  // const updateSignUpUsername = (input) => {
+  //   setSignUpUsername(signUpUsername = input);
+  // };
   const updateSignUpUsername = (input) => {
-    setSignUpUsername(signUpUsername = input);
-  }
+    setSignUpUsername(input);
+  };
+
+  // const updateSignUpPassword = (input) => {
+  //   setSignUpPassword(signUpPassword = input);
+  // };
 
   const updateSignUpPassword = (input) => {
-    setSignUpPassword(signUpPassword = input);
+    setSignUpPassword(input);
   };
+
+  // const updateLogInUsername = (input) => {
+  //   setLogInUsername(logInUsername = input);
+  // };
 
   const updateLogInUsername = (input) => {
-    setLogInUsername(logInUsername = input);
+    setLogInUsername(input);
   };
 
+  // const updateLogInPassword = (input) => {
+  //   setLogInPassword(logInPassword = input);
+  // };
+
   const updateLogInPassword = (input) => {
-    setLogInPassword(logInPassword = input);
+    setLogInPassword(input);
   };
 
   const saveUser = () => {
     const username = signUpUsername;
     const password = signUpPassword;
     const method = 'POST';
+    navigate('/HomePage', { state: username });
     // check route name on backend for /signup
-    fetch('/signup', {
-      method,
-      body: JSON.stringify({ username: username, password: password }),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data === true) {
-          setIsSignedIn(isSignedIn = true);
-          setSignUpUsername(signUpUsername = '');
-          setSignUpPassword(signUpPassword = '');
-        } 
-        else {
-          setSignUpUsername(signUpUsername = '');
-          setSignUpPassword(signUpPassword = '');
-        }
-      })
-      .catch((err) => console.log(err));
+    // fetch('/signup', {
+    //   method,
+    //   body: JSON.stringify({ username: username, password: password }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     if (data === true) {
+    //       setSignUpUsername(signUpUsername = '');
+    //       setSignUpPassword(signUpPassword = '');
+    //       setIsSignedIn(isSignedIn = true);
+    //       navigate('/HomePage');
+    //     } else {
+    //       setSignUpUsername(signUpUsername = '');
+    //       setSignUpPassword(signUpPassword = '');
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
+
   };
 
   const logIn = () => {
     const username = logInUsername;
     const password = logInPassword;
     const method = 'POST';
+    navigate('/HomePage', { state: username });
     // check route name on backend for /login 
-    fetch('/login', {
-      method,
-      body: JSON.stringify({ username: username, password: password }),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data === true) {
-          setLogInUsername(logInUsername = '');
-          setLogInPassword(logInPassword = '');
-          setIsSignedIn(isSignedIn = true);
-        } else {
-          setLogInUsername(signUpUsername = '');
-          setLogInPassword(logInPassword = '');
-        }
-      })
-      .catch((err) => console.log(err));
+    // fetch('/login', {
+    //   method,
+    //   body: JSON.stringify({ username: username, password: password }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     if (data === true) {
+    //       setLogInUsername(logInUsername = '');
+    //       setLogInPassword(logInPassword = '');
+    //       setIsSignedIn(isSignedIn = true);
+    //     } else {
+    //       setLogInUsername(signUpUsername = '');
+    //       setLogInPassword(logInPassword = '');
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (isSignedIn === true) navigate('/');
   // }, [isSignedIn]);
-  const { state } = useLocation();
-  console.log('the state:');
-  console.log(state);
-  console.log(state);
+
   return (
     <div>
-      <div><SignUp /></div>
-      <div><LogIn /></div>
+      <div><SignUp signUpUsername={signUpUsername} signUpPassword={signUpPassword} updateSignUpUsername={updateSignUpUsername} updateSignUpPassword={updateSignUpPassword} saveUser={saveUser} /></div>
+      <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} updateLogInUsername={updateLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div>
     </div>
   );
 }

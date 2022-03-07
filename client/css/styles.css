@@ -12,3 +12,7 @@
   grid-gap: 20px;
   margin-top: 20px;
 }
+
+#EventBox {
+  border: 1px solid green;
+}

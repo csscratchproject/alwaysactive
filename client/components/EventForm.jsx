@@ -5,11 +5,27 @@ function EventForm(props) {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [time, setTime] = useState('');
   const [description, setDescription] = useState('');
+  const [number, setNumber] = useState('');
   const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
-  // <input type="date" onChange={(e) => setDate(e.target.value)} />
+  const saveEvent = () => {
+    // make sure to check if the route name matches up in backend
+    let method = 'POST';
+    // fetch('/events', {
+    //   method,
+    //   body: JSON.stringify({ name, city, state, time, description, number, date }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((err) => console.log(err));
+
+    props.setForm(false);
+  };
 
   return (
     <div>
@@ -37,6 +53,12 @@ function EventForm(props) {
         onChange={(e) => setDescription(e.target.value)}
         value={description}
       />
+      <input
+        type="text"
+        placeholder="How many people do you need for this event?"
+        onChange={(e) => setNumber(e.target.value)}
+        value={number}
+      />
       <h6>When will your event be held?</h6>
       <input
         type="date"
@@ -47,6 +69,9 @@ function EventForm(props) {
         type="time"
         onChange={(e) => setTime(e.target.value)}
       />
+      <button onClick={() => saveEvent()}>
+        Save Event
+      </button>
       <button onClick={() => props.setForm(false)}>
         Cancel
       </button>
