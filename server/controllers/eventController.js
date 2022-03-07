@@ -33,9 +33,10 @@ const eventController = {
     );
   },
   getEvents: (req, res, next) => {
-    const sql = 'SELECT e.*, COUNT(r._id) FROM events e LEFT JOIN rsvp r ON e._id = r.event_id GROUP BY e._id;';
+    const sql = 'SELECT e.*, COUNT(r._id), CASE WHEN EXISTS (SELECT * FROM rsvp r WHERE r.event_id = e._id AND r.username = $1) THEN TRUE ELSE FALSE END userStatus FROM events e LEFT JOIN rsvp r ON e._id = r.event_id GROUP BY e._id;';
     db.query(
       sql,
+      [req.body.username],
       (err, events) => {
         if (err) { return next(err); }
         res.locals.events = events.rows;
