@@ -19,7 +19,7 @@ function EventForm(props) {
       method,
       body: JSON.stringify({ name, city, state, description, number, time, date, username }),
       headers: { 'Content-Type': 'application/json' },
-    })
+    }).then(props.getEvents)
       // .then((data) => data.json())
       // .then((data) => {
       //   console.log(data);
@@ -74,7 +74,7 @@ function EventForm(props) {
         type="time"
         onChange={(e) => setTime(e.target.value)}
       />
-      <button onClick={() => saveEvent()}>
+      <button onClick={() => {saveEvent();}}>
         Save Event
       </button>
       <button onClick={() => props.setForm(false)}>

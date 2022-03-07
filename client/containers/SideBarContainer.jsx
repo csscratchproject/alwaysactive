@@ -6,11 +6,13 @@ import SignUpLogInButton from '../components/SignUpLogInButton';
 import SignUpLogInPage from '../components/SignUpLogInPage';
 
 function SideBarContainer(props) {
-  const [formOpened, setForm] = useState(false);
+  // const [formOpened, setForm] = useState(false);
   return (
     <div id="SideBarContainer">
-      {formOpened === false && <CreateEventButton setForm={setForm} />}
-      {formOpened && <EventForm username={props.username} setForm={setForm} />}
+      {props.formOpened === false && <CreateEventButton setForm={props.setForm} />}
+      {/* {props.formOpened && <EventForm username={props.username} setForm={props.setForm} eventSaved={props.eventSaved} setEventSaved={props.setEventSaved} />} */}
+      {props.formOpened && <EventForm username={props.username} setForm={props.setForm} getEvents={props.getEvents} />}
+
     </div>
   );
 }
