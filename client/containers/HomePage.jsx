@@ -12,7 +12,6 @@ function HomePage(props) {
   const [formOpened, setForm] = useState(false);
   const [eventsArr, setEventsArr] = useState([]);
   const [eventSaved, setEventSaved] = useState(false);
-  console.log(state);
 
   let events = [];
 
@@ -20,6 +19,12 @@ function HomePage(props) {
     const response = await fetch('/events');
     const data = await response.json();
     setEventsArr(data);
+  };
+
+  const toggleRSVP = (index, status) => {
+    const newArr = [...eventsArr];
+    newArr[index].count = status ? '1' : '0';
+    setEventsArr(newArr);
   };
 
   while (counter < 1) {
@@ -31,12 +36,19 @@ function HomePage(props) {
     const dateObj = new Date(eventsArr[i].time);
     events.push(<EventBox
       key={i}
+      index={i}
       name={eventsArr[i].name}
       city={eventsArr[i].city}
       state={eventsArr[i].state}
       description={eventsArr[i].description}
+      owner={eventsArr[i].username}
+      eventId={eventsArr[i]._id}
+      rsvpStatus={eventsArr[i].count}
+      user={state}
       date={dateObj.toLocaleDateString()}
       time={dateObj.toLocaleTimeString()}
+      getEvents={getEvents}
+      toggleRSVP={toggleRSVP}
     />);
   }
   console.log(events);
