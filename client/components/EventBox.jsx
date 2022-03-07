@@ -10,7 +10,7 @@ function EventBox(props) {
     <h1>{props.date}</h1>,
     <h1>{props.time}</h1>,
   ];
-
+  console.log(props.user);
   const sendRsvp = () => {
     fetch('/rsvp', {
       method: 'POST',
@@ -19,12 +19,11 @@ function EventBox(props) {
         'Content-Type': 'application/json',
       },
     })
-      .then((data) => data.json())
-      .then((data) => {
-        props.toggleRSVP(props.index, data.rsvp)})
+      .then(props.getEvents)
       .catch((e) => console.log(e));
   };
-  if (props.rsvpStatus === '1') {
+  console.log(props.rsvpStatus)
+  if (props.rsvpStatus) {
     event.push(
       <button type="submit" onClick={sendRsvp}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star-fill" viewBox="0 0 16 16">
