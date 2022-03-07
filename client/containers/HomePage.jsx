@@ -25,11 +25,17 @@ function HomePage(props) {
   const getFilteredEvents = async (city, stateF) => {
     const response = await fetch('/filter', {
       method: 'POST',
-      body: JSON.stringify({ city: city, state: stateF }),
+      body: JSON.stringify({ username: state, city: city, state: stateF }),
       headers: { 'Content-Type': 'application/json' },
     });
     const data = await response.json();
     setEventsArr(data);
+  };
+
+  const toggleRsvp = (index, status) => {
+    const newArr = [...eventsArr];
+    newArr[index].userstatus = status;
+    setEventsArr(newArr);
   };
 
   while (counter < 1) {
@@ -41,6 +47,7 @@ function HomePage(props) {
     const dateObj = new Date(eventsArr[i].time);
     events.push(<EventBox
       key={i}
+      index={i}
       name={eventsArr[i].name}
       city={eventsArr[i].city}
       state={eventsArr[i].state}
@@ -52,6 +59,7 @@ function HomePage(props) {
       date={dateObj.toLocaleDateString()}
       time={dateObj.toLocaleTimeString()}
       getEvents={getEvents}
+      toggleRsvp={toggleRsvp}
     />);
   }
   console.log(events);
