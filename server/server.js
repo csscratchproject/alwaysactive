@@ -1,7 +1,9 @@
-const express = require('express');
+ const express = require('express');
 const path = require('path');
 
 const PORT = 3000;
+
+const router = require('./routes/router');
 
 const app = express();
 
@@ -20,11 +22,14 @@ if (process.env.NODE_ENV === 'production') {
 //   );
 // });
 
+app.use('/test', router);
+
 app.use((req, res) => {
   res.sendStatus(404);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
+  console.log(err);
   res.status(500).json(err);
 });
 
