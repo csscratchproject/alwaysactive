@@ -27,7 +27,7 @@ router.delete('/events', eventController.deleteEvent, (req, res) => {
   res.sendStatus(200);
 });
 // get events
-router.get('/events', eventController.getEvents, (req, res) => {
+router.put('/events', eventController.getEvents, (req, res) => {
   res.status(200).json(res.locals.events);
 });
 

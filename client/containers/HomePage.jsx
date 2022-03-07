@@ -17,7 +17,7 @@ function HomePage(props) {
   let events = [];
 
   const getEvents = async () => {
-    const response = await fetch('/events');
+    const response = await fetch('/events', {method: 'PUT', body: JSON.stringify({username: state}), headers: { 'Content-Type': 'application/json' } });
     const data = await response.json();
     setEventsArr(data);
   };
@@ -35,8 +35,13 @@ function HomePage(props) {
       city={eventsArr[i].city}
       state={eventsArr[i].state}
       description={eventsArr[i].description}
+      owner={eventsArr[i].username}
+      eventId={eventsArr[i]._id}
+      rsvpStatus={eventsArr[i].userstatus}
+      user={state}
       date={dateObj.toLocaleDateString()}
       time={dateObj.toLocaleTimeString()}
+      getEvents={getEvents}
     />);
   }
   console.log(events);
