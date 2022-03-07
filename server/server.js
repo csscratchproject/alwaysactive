@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 //   );
 // });
 
-app.use('/test', router);
+app.use('/', router);
 
 app.use((req, res) => {
   res.sendStatus(404);

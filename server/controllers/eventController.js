@@ -5,13 +5,15 @@ const db = require('../models/model');
 const eventController = {
   addEvent: (req, res, next) => {
     const sql = 'INSERT INTO events (name, city, state, time, description, username) VALUES ($1, $2, $3, $4, $5, $6);';
+    const rawDateTime = new Date(`${req.body.date}T${req.body.time}`);
+    const timeStamp = rawDateTime.toISOString();
     db.query(
       sql,
       [
         req.body.name,
         req.body.city,
         req.body.state,
-        req.body.time,
+        timeStamp,
         req.body.description,
         req.body.username,
       ],
