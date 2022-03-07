@@ -22,6 +22,16 @@ function HomePage(props) {
     setEventsArr(data);
   };
 
+  const getFilteredEvents = async (city, stateF) => {
+    const response = await fetch('/filter', {
+      method: 'POST',
+      body: JSON.stringify({ city: city, state: stateF }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const data = await response.json();
+    setEventsArr(data);
+  };
+
   while (counter < 1) {
     getEvents();
     counter += 1;
@@ -49,7 +59,7 @@ function HomePage(props) {
   return (
     <div>
       <div id="ContainerParent">
-        <SideBarContainer username={state} formOpened={formOpened} setForm={setForm} getEvents={getEvents} />
+        <SideBarContainer username={state} formOpened={formOpened} setForm={setForm} getEvents={getEvents} getFilteredEvents={getFilteredEvents} />
         <EventsContainer events={events} />
       </div>
     </div>

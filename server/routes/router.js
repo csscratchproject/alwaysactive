@@ -31,4 +31,8 @@ router.put('/events', eventController.getEvents, (req, res) => {
   res.status(200).json(res.locals.events);
 });
 
+router.post('/filter', eventController.filterEvents, (req, res) => {
+  res.status(200).json(res.locals.filteredEvents);
+});
+
 module.exports = router;

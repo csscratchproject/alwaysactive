@@ -46,7 +46,28 @@ const eventController = {
       },
     );
   },
+
+  filterEvents: (req, res, next) => {
+    const sql = 'SELECT * FROM events WHERE city = $1 AND state = $2';
+    db.query(
+      sql,
+      [
+        req.body.city,
+        req.body.state,
+      ],
+      (err, events) => {
+        if (err) return next(err);
+        res.locals.filteredEvents = events.rows;
+        return next();
+      },
+    );
+  },
+
+
+
 };
+
+// SELECT e.*, COUNT(r._id), CASE WHEN EXISTS (SELECT * FROM rsvp r WHERE r.event_id = e._id AND r.username = 'Haku') THEN TRUE ELSE FALSE END userStatus FROM events e LEFT JOIN rsvp r ON e._id = r.event_id GROUP BY e._id ORDER BY e.time ASC;
 
 module.exports = eventController;
 
