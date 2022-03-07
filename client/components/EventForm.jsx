@@ -10,25 +10,30 @@ function EventForm(props) {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
+  const username = props.username
+
   const saveEvent = () => {
     // make sure to check if the route name matches up in backend
     let method = 'POST';
-    // fetch('/events', {
-    //   method,
-    //   body: JSON.stringify({ name, city, state, time, description, number, date }),
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => console.log(err));
+    fetch('/events', {
+      method,
+      body: JSON.stringify({ name, city, state, description, number, time, date, username }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      // .then((data) => data.json())
+      // .then((data) => {
+      //   console.log(data);
+      // })
+      .catch((err) => console.log(err));
 
     props.setForm(false);
   };
 
+
   return (
     <div>
+      <h1>{date}</h1>
+      <h1>{time}</h1>
       <input
         type="text"
         placeholder="What is the name of your event?"

@@ -23,7 +23,7 @@ function HomePage(props) {
     <div>
       {/* <SignUpLogInButton /> */}
       <div id="ContainerParent">
-        <SideBarContainer />
+        <SideBarContainer username={state} />
         <EventsContainer />
       </div>
     </div>

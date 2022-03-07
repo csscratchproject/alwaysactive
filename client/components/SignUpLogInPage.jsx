@@ -54,26 +54,30 @@ function SignUpLogInPage(props) {
     const username = signUpUsername;
     const password = signUpPassword;
     const method = 'POST';
-    navigate('/HomePage', { state: username });
+    // navigate('/HomePage', { state: username });
     // check route name on backend for /signup
-    // fetch('/signup', {
-    //   method,
-    //   body: JSON.stringify({ username: username, password: password }),
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     if (data === true) {
-    //       setSignUpUsername(signUpUsername = '');
-    //       setSignUpPassword(signUpPassword = '');
-    //       setIsSignedIn(isSignedIn = true);
-    //       navigate('/HomePage');
-    //     } else {
-    //       setSignUpUsername(signUpUsername = '');
-    //       setSignUpPassword(signUpPassword = '');
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    fetch('/signup', {
+      method,
+      body: JSON.stringify({ username: username, password: password }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        if (data === true) {
+          // setSignUpUsername(signUpUsername = '');
+          // setSignUpPassword(signUpPassword = '');
+          setSignUpUsername('');
+          setSignUpPassword('');
+          setIsSignedIn(true);
+          navigate('/HomePage', { state: username });
+        } else {
+          // setSignUpUsername(signUpUsername = '');
+          // setSignUpPassword(signUpPassword = '');
+          setSignUpUsername('');
+          setSignUpPassword('');
+        }
+      })
+      .catch((err) => console.log(err));
 
   };
 
@@ -81,25 +85,25 @@ function SignUpLogInPage(props) {
     const username = logInUsername;
     const password = logInPassword;
     const method = 'POST';
-    navigate('/HomePage', { state: username });
     // check route name on backend for /login 
-    // fetch('/login', {
-    //   method,
-    //   body: JSON.stringify({ username: username, password: password }),
-    //   headers: { 'Content-Type': 'application/json' },
-    // })
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     if (data === true) {
-    //       setLogInUsername(logInUsername = '');
-    //       setLogInPassword(logInPassword = '');
-    //       setIsSignedIn(isSignedIn = true);
-    //     } else {
-    //       setLogInUsername(signUpUsername = '');
-    //       setLogInPassword(logInPassword = '');
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    fetch('/login', {
+      method,
+      body: JSON.stringify({ username: username, password: password }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        if (data === true) {
+          setLogInUsername('');
+          setLogInPassword('');
+          setIsSignedIn(true);
+          navigate('/HomePage', { state: username });
+        } else {
+          setLogInUsername('');
+          setLogInPassword('');
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   // const navigate = useNavigate();

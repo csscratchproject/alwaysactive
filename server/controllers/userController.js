@@ -34,13 +34,13 @@ userController.login = (req, res, next) => {
     .then((user) => {
       if (user) {
         if (authenticate(user, req.body.password)) {
-          res.locals.result = { successful: true };
+          res.locals.result = true;
           return next();
         }
-        res.locals.result = { successful: false };
+        res.locals.result = false;
         return next();
       }
-      res.locals.result = { successful: false };
+      res.locals.result = false;
       return next();
     })
     .catch((e) => next(e));
@@ -52,12 +52,12 @@ userController.signup = (req, res, next) => {
       if (!user) {
         return addUser(req.body.username, req.body.password)
           .then((result) => {
-            res.locals.result = { successful: result };
+            res.locals.result = result;
             return next();
           })
           .catch((e) => next(e));
       }
-      res.locals.result = { successful: false };
+      res.locals.result = false;
       return next();
     })
     .catch((e) => next(e));

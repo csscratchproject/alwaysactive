@@ -10,7 +10,7 @@ function SideBarContainer(props) {
   return (
     <div id="SideBarContainer">
       {formOpened === false && <CreateEventButton setForm={setForm} />}
-      {formOpened && <EventForm setForm={setForm} />}
+      {formOpened && <EventForm username={props.username} setForm={setForm} />}
     </div>
   );
 }
