@@ -92,6 +92,7 @@ const insertRsvp = (username, eventId) => (
 );
 
 userController.rsvp = (req, res, next) => {
+  console.log(req.body.username);
   rsvpExists(req.body.username, req.body.event_id)
     .then((exists) => {
       if (exists) {
