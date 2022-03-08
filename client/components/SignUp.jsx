@@ -6,20 +6,20 @@ function SignUp(props) {
     <div>
       <h1>Sign Up</h1>
       <div>
-        <input
+        <input id='inputBox'
           onChange={(e) => {props.updateSignUpUsername(e.target.value)}}
           value={props.signUpUsername}
           placeholder='Username'
           type='text'
         />
-        <input
+        <input id='inputBox'
           onChange={(e) => {props.updateSignUpPassword(e.target.value)}}
           value={props.signUpPassword}
           placeholder='Password'
           type='text'
         />
         <div>
-          <button onClick={() => {props.saveUser()}}>
+          <button id='signUpBtn' onClick={() => {props.saveUser()}}>
             Sign Up
           </button>
         </div>
