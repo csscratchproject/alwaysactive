@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { render } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import SignUpLogInPage from './SignUpLogInPage';
@@ -15,9 +14,6 @@ function SignUpLogInButton(props) {
       <button onClick={() => {navigate("/SignUpLogInPage", {state: func});}}>
         Sign Up/Log In
       </button>
-      {/* <button onClick={() => {props.setSignedIn(true)}}>
-        Sign Up/Log In
-      </button> */}
     </div>
   );
 };

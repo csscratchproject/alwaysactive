@@ -1,4 +1,3 @@
-const path = require('path');
 const db = require('../models/model');
 
 const findUser = (username) => (
@@ -63,10 +62,7 @@ userController.signup = (req, res, next) => {
     .catch((e) => next(e));
 };
 
-/*
-* RSVP functions and controllers
-*/
-
+// rsvp functions and controllers
 const rsvpExists = (username, eventId) => (
   new Promise((resolve, reject) => {
     db.query('SELECT * FROM rsvp WHERE username = $1 AND event_id = $2;', [username, eventId])
@@ -92,7 +88,6 @@ const insertRsvp = (username, eventId) => (
 );
 
 userController.rsvp = (req, res, next) => {
-  console.log(req.body.username);
   rsvpExists(req.body.username, req.body.event_id)
     .then((exists) => {
       if (exists) {

@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-const path = require('path');
 const db = require('../models/model');
 
 const eventController = {
@@ -63,20 +61,6 @@ const eventController = {
       },
     );
   },
-
-
-
 };
 
-// SELECT e.*, COUNT(r._id), CASE WHEN EXISTS (SELECT * FROM rsvp r WHERE r.event_id = e._id AND r.username = 'Haku') THEN TRUE ELSE FALSE END userStatus FROM events e LEFT JOIN rsvp r ON e._id = r.event_id GROUP BY e._id ORDER BY e.time ASC;
-
 module.exports = eventController;
-
-//   updateEvent: (req, res, next) => {
-//     const sql = `UPDATE events SET ${req.body.new} WHERE ${req.body.event_id};`;
-//     db.query(sql, (err) => {
-//       if (err) return next(err);
-//       res.status(200).send();
-//       return next();
-//     });
-//   },
