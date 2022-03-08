@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function EventBox(props) {
   const event = [
-    <h1>{props.name}</h1>,
-    <h1>{props.city}</h1>,
-    <h1>{props.state}</h1>,
-    <h1>{props.description}</h1>,
-    <h1>{props.date}</h1>,
-    <h1>{props.time}</h1>,
+    <h4>{props.name}</h4>,
+    <h5>{props.city}</h5>,
+    <h5>{props.state}</h5>,
+    <h5>{props.description}</h5>,
+    <h5>{props.date}</h5>,
+    <h5>{props.time}</h5>,
   ];
   console.log(props.user);
   const sendRsvp = () => {
@@ -54,7 +55,7 @@ function EventBox(props) {
         }}
         type="submit"
       >
-        Delete
+        <DeleteIcon />
       </button>,
     );
   }

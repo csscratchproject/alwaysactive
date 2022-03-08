@@ -4,8 +4,8 @@ import EventForm from './EventForm';
 
 function CreateEventButton(props) {
   return (
-    <div>
-      <button onClick={() => {props.setForm(true)}}>
+    <div id='createBtnContainer'>
+      <button id="createBtn" onClick={() => {props.setForm(true)}}>
         Create Your Own Event
       </button>
     </div>

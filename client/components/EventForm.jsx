@@ -32,8 +32,6 @@ function EventForm(props) {
 
   return (
     <div>
-      <h1>{date}</h1>
-      <h1>{time}</h1>
       <input
         type="text"
         placeholder="What is the name of your event?"
