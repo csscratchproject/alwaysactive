@@ -20,10 +20,11 @@ function EventBox(props) {
         'Content-Type': 'application/json',
       },
     })
-      .then(props.getEvents)
+      .then((data) => data.json())
+      .then((data) => props.toggleRsvp(props.index, data.rsvp))
       .catch((e) => console.log(e));
   };
-  console.log(props.rsvpStatus)
+  console.log(props.rsvpStatus);
   if (props.rsvpStatus) {
     event.push(
       <button type="submit" onClick={sendRsvp}>
