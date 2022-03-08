@@ -60,7 +60,6 @@ body{
   padding-left: 20px;
   margin: 10px;
   border-radius: 10px;
-  /* background-image: linear-gradient(to right bottom,#9bced6,#b193be); */
   background-image: linear-gradient(to right bottom,#A0B5EB,#C9F0E4);
   animation: float 7s ease-in-out infinite;
   color: rgb(33, 33, 33);

@@ -13,17 +13,12 @@ function EventForm(props) {
   const username = props.username
 
   const saveEvent = () => {
-    // make sure to check if the route name matches up in backend
     let method = 'POST';
     fetch('/events', {
       method,
       body: JSON.stringify({ name, city, state, description, number, time, date, username }),
       headers: { 'Content-Type': 'application/json' },
     }).then(props.getEvents)
-      // .then((data) => data.json())
-      // .then((data) => {
-      //   console.log(data);
-      // })
       .catch((err) => console.log(err));
 
     props.setForm(false);

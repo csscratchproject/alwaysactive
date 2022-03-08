@@ -7,7 +7,6 @@ import LogIn from './LogIn';
 import HomePage from '../containers/HomePage';
 import { useLocation } from 'react-router-dom';
 
-// const SignUpLogInPage = () =>{
 function SignUpLogInPage(props) {
   const [signUpUsername, setSignUpUsername] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
@@ -19,32 +18,17 @@ function SignUpLogInPage(props) {
 
   const navigate = useNavigate();
 
-  // const updateSignUpUsername = (input) => {
-  //   setSignUpUsername(signUpUsername = input);
-  // };
   const updateSignUpUsername = (input) => {
     setSignUpUsername(input);
   };
-
-  // const updateSignUpPassword = (input) => {
-  //   setSignUpPassword(signUpPassword = input);
-  // };
 
   const updateSignUpPassword = (input) => {
     setSignUpPassword(input);
   };
 
-  // const updateLogInUsername = (input) => {
-  //   setLogInUsername(logInUsername = input);
-  // };
-
   const updateLogInUsername = (input) => {
     setLogInUsername(input);
   };
-
-  // const updateLogInPassword = (input) => {
-  //   setLogInPassword(logInPassword = input);
-  // };
 
   const updateLogInPassword = (input) => {
     setLogInPassword(input);
@@ -54,8 +38,6 @@ function SignUpLogInPage(props) {
     const username = signUpUsername;
     const password = signUpPassword;
     const method = 'POST';
-    // navigate('/HomePage', { state: username });
-    // check route name on backend for /signup
     fetch('/signup', {
       method,
       body: JSON.stringify({ username: username, password: password }),
@@ -64,28 +46,22 @@ function SignUpLogInPage(props) {
       .then((data) => data.json())
       .then((data) => {
         if (data === true) {
-          // setSignUpUsername(signUpUsername = '');
-          // setSignUpPassword(signUpPassword = '');
           setSignUpUsername('');
           setSignUpPassword('');
           setIsSignedIn(true);
           navigate('/HomePage', { state: username });
         } else {
-          // setSignUpUsername(signUpUsername = '');
-          // setSignUpPassword(signUpPassword = '');
           setSignUpUsername('');
           setSignUpPassword('');
         }
       })
       .catch((err) => console.log(err));
-
   };
 
   const logIn = () => {
     const username = logInUsername;
     const password = logInPassword;
     const method = 'POST';
-    // check route name on backend for /login 
     fetch('/login', {
       method,
       body: JSON.stringify({ username: username, password: password }),
@@ -105,12 +81,6 @@ function SignUpLogInPage(props) {
       })
       .catch((err) => console.log(err));
   };
-
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (isSignedIn === true) navigate('/');
-  // }, [isSignedIn]);
 
   return (
     <div id='modalContainer'>

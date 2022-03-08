@@ -6,14 +6,11 @@ const pgUrl = 'postgres://fgitxgtq:iX2xv7gauYS89wgBGN8gfi21Vfqe53bp@jelani.db.el
 const pool = new Pool({
   connectionString: pgUrl,
 });
-console.log('connected');
 
 pool.query(`CREATE TABLE IF NOT EXISTS users (
   username VARCHAR PRIMARY KEY,
   password VARCHAR NOT NULL
 );`);
-
-console.log('did first query?');
 
 pool.query(`CREATE TABLE IF NOT EXISTS events (
   _id serial PRIMARY KEY,
