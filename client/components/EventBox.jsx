@@ -11,7 +11,7 @@ function EventBox(props) {
     <h5>{props.date}</h5>,
     <h5>{props.time}</h5>,
   ];
-  console.log(props.user);
+
   const sendRsvp = () => {
     fetch('/rsvp', {
       method: 'POST',
@@ -24,7 +24,7 @@ function EventBox(props) {
       .then((data) => props.toggleRsvp(props.index, data.rsvp))
       .catch((e) => console.log(e));
   };
-  console.log(props.rsvpStatus);
+
   if (props.rsvpStatus) {
     event.push(
       <button type="submit" onClick={sendRsvp}>
@@ -42,6 +42,7 @@ function EventBox(props) {
       </button>,
     );
   }
+
   if (props.owner === props.user) {
     event.push(
       <button

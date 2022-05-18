@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 const { Pool } = require('pg');
 
-const pgUrl = 'postgres://fgitxgtq:iX2xv7gauYS89wgBGN8gfi21Vfqe53bp@jelani.db.elephantsql.com/fgitxgtq';
+const pgUrl = 'postgres://bcdobakt:uGtTIF85BE-k6J5mtlsw3bxIbNgjKT1B@drona.db.elephantsql.com/bcdobakt';
 
 const pool = new Pool({
   connectionString: pgUrl,

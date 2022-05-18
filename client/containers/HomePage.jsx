@@ -12,9 +12,8 @@ function HomePage(props) {
   const [formOpened, setForm] = useState(false);
   const [eventsArr, setEventsArr] = useState([]);
   const [eventSaved, setEventSaved] = useState(false);
-  console.log(state);
 
-  let events = [];
+  const events = [];
 
   const getEvents = async () => {
     const response = await fetch('/events', {method: 'PUT', body: JSON.stringify({username: state}), headers: { 'Content-Type': 'application/json' } });
@@ -43,7 +42,7 @@ function HomePage(props) {
     counter += 1;
   }
 
-  for (let i = 0; i < eventsArr.length; i++) {
+  for (let i = 0; i < eventsArr.length; i += 1) {
     const dateObj = new Date(eventsArr[i].time);
     events.push(<EventBox
       key={i}
@@ -62,7 +61,6 @@ function HomePage(props) {
       toggleRsvp={toggleRsvp}
     />);
   }
-  console.log(events);
 
   return (
     <div>
