@@ -13,6 +13,11 @@ router.post('/login', userController.login, (req, res) => {
 router.post('/signup', userController.signup, (req, res) => {
   res.status(200).json(res.locals.result);
 });
+// delete user
+router.post('/deleteUser', userController.deleteUser, (req, res) => {
+  res.status(200).json(res.locals.deleted)
+});
+
 // rsvp
 router.post('/rsvp', userController.rsvp, (req, res) => {
   res.status(200).json(res.locals.result);

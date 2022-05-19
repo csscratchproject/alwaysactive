@@ -19,5 +19,6 @@ module.exports = {
     'react',
   ],
   rules: {
+    'max-len': 'off',
   },
 };

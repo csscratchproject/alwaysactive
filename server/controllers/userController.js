@@ -25,8 +25,7 @@ const authenticate = (user, password) => {
   return false;
 };
 
-const userController = {
-};
+const userController = {};
 
 userController.login = (req, res, next) => {
   findUser(req.body.username)
@@ -60,6 +59,19 @@ userController.signup = (req, res, next) => {
       return next();
     })
     .catch((e) => next(e));
+};
+
+userController.deleteUser = (req, res, next) => {
+  db.query(`DELETE FROM users WHERE username = '${req.body.username}' RETURNING *;`)
+    .then((result) => {
+      if (result.rows[0]) {
+        console.log(`sucessfully deleted username - ${result.rows[0].username}`);
+        res.locals.deleted = true;
+      }
+      else res.locals.deleted = false;
+      return next();
+    })
+    .catch((err) => next(err));
 };
 
 // rsvp functions and controllers

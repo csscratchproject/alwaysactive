@@ -1,11 +1,7 @@
-import React, { Component, useEffect } from 'react';
-import { render } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
-import HomePage from '../containers/HomePage';
-import { useLocation } from 'react-router-dom';
 
 function SignUpLogInPage(props) {
   const [signUpUsername, setSignUpUsername] = useState('');
@@ -82,11 +78,26 @@ function SignUpLogInPage(props) {
       .catch((err) => console.log(err));
   };
 
+  const deleteUser = (username) => {
+    fetch('/deleteUser', {
+      method: 'POST',
+      body: JSON.stringify({ username }),
+      headers: { 'Content-Type': 'application/json'},
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === true) console.log('user deleted successful');
+        else console.log('no username was deleted');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div id='modalContainer'>
       <div id="modal">
         <div><SignUp signUpUsername={signUpUsername} signUpPassword={signUpPassword} updateSignUpUsername={updateSignUpUsername} updateSignUpPassword={updateSignUpPassword} saveUser={saveUser} /></div>
         <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} updateLogInUsername={updateLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div>
+        <button type='button' id='deleteBtn' onClick={() => deleteUser(signUpUsername)}>Delete user account</button>
       </div>
     </div>
   );

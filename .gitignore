@@ -103,4 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+.DS_Store
+
 build/
+
+#postgres URL
+postgres-URL.js

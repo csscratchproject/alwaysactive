@@ -18,7 +18,8 @@ function EventForm(props) {
       method,
       body: JSON.stringify({ name, city, state, description, number, time, date, username }),
       headers: { 'Content-Type': 'application/json' },
-    }).then(props.getEvents)
+    })
+      .then(props.getEvents)
       .catch((err) => console.log(err));
 
     props.setForm(false);
