@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
+import TestLogin from './TestLogin';
 
 function SignUpLogInPage(props) {
   const [signUpUsername, setSignUpUsername] = useState('');
@@ -10,7 +11,7 @@ function SignUpLogInPage(props) {
   const [logInPassword, setLogInPassword] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const { state } = useLocation();
+  // const { state } = useLocation();
 
   const navigate = useNavigate();
 
@@ -22,36 +23,41 @@ function SignUpLogInPage(props) {
     setSignUpPassword(input);
   };
 
-  const updateLogInUsername = (input) => {
-    setLogInUsername(input);
-  };
+  // const updateLogInUsername = (input) => {
+  //   setLogInUsername(input);
+  // };
 
   const updateLogInPassword = (input) => {
     setLogInPassword(input);
   };
 
   const saveUser = () => {
-    const username = signUpUsername;
-    const password = signUpPassword;
-    const method = 'POST';
-    fetch('/signup', {
-      method,
-      body: JSON.stringify({ username: username, password: password }),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data === true) {
-          setSignUpUsername('');
-          setSignUpPassword('');
-          setIsSignedIn(true);
-          navigate('/HomePage', { state: username });
-        } else {
-          setSignUpUsername('');
-          setSignUpPassword('');
-        }
-      })
-      .catch((err) => console.log(err));
+    // const username = signUpUsername;
+    // const password = signUpPassword;
+    // const method = 'POST';
+    // console.log(username)
+    // console.log(password)
+    console.log('why is this')
+    // if (!username && !password) {
+      // fetch('/signup', {
+      //   method,
+      //   body: JSON.stringify({ username: username, password: password }),
+      //   headers: { 'Content-Type': 'application/json' },
+      // })
+      //   .then((data) => data.json())
+      //   .then((data) => {
+      //     if (data === true) {
+      //       setSignUpUsername('');
+      //       setSignUpPassword('');
+      //       setIsSignedIn(true);
+      //       navigate('/HomePage', { state: username });
+      //     } else {
+      //       setSignUpUsername('');
+      //       setSignUpPassword('');
+      //     }
+      //   })
+      //   .catch((err) => console.log(err));
+    // }
   };
 
   const logIn = () => {
@@ -96,7 +102,9 @@ function SignUpLogInPage(props) {
     <div id='modalContainer'>
       <div id="modal">
         <div><SignUp signUpUsername={signUpUsername} signUpPassword={signUpPassword} updateSignUpUsername={updateSignUpUsername} updateSignUpPassword={updateSignUpPassword} saveUser={saveUser} /></div>
-        <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} updateLogInUsername={updateLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div>
+        {/* <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} updateLogInUsername={updateLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div> */}
+        {/* <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} setLogInUsername={setLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div> */}
+        <div><TestLogin logInUsername={logInUsername} logInPassword={logInPassword} setLogInUsername={setLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div>
         <button type='button' id='deleteBtn' onClick={() => deleteUser(signUpUsername)}>Delete user account</button>
       </div>
     </div>

@@ -1,31 +1,33 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 
 function SignUp(props) {
   return (
     <div>
       <h1>Sign Up</h1>
-      <div>
-        <input id='inputBox'
-          onChange={(e) => {props.updateSignUpUsername(e.target.value)}}
+      <form>
+        <input
+          id="inputBox"
+          onChange={(e) => { props.updateSignUpUsername(e.target.value); }}
           value={props.signUpUsername}
-          placeholder='Username'
-          type='text'
+          placeholder="Username"
+          type="text"
+          required
         />
-        <input id='inputBox'
-          onChange={(e) => {props.updateSignUpPassword(e.target.value)}}
+        <input
+          id="inputBox"
+          onChange={(e) => { props.updateSignUpPassword(e.target.value); }}
           value={props.signUpPassword}
-          placeholder='Password'
-          type='text'
+          placeholder="Password"
+          type="text"
+          required
         />
-        <div>
-          <button id='signUpBtn' onClick={() => {props.saveUser()}}>
-            Sign Up
-          </button>
-        </div>
-      </div>
+        <button id="signUpBtn" onClick={() => { props.saveUser() }}>
+        {/* <button id="signUpBtn" type="submit" onClick={() => { props.saveUser(); console.log('trying to sign up') }}> */}
+          Sign Up
+        </button>
+      </form>
     </div>
-  )
-};
+  );
+}
 
 export default SignUp;

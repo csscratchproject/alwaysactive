@@ -45,6 +45,7 @@ userController.login = (req, res, next) => {
 };
 
 userController.signup = (req, res, next) => {
+  console.log(req.body)
   findUser(req.body.username)
     .then((user) => {
       if (!user) {

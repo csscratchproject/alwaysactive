@@ -7,7 +7,7 @@ function LogIn(props) {
       <h1>Log In</h1>
       <div>
         <input id='inputBox'
-          onChange={(e) => {props.updateLogInUsername(e.target.value)}}
+          onChange={(e) => {props.setLogInUsername(e.target.value)}}
           value={props.logInUsername}
           placeholder='Username'
           type='text'
@@ -16,7 +16,7 @@ function LogIn(props) {
           onChange={(e) => {props.updateLogInPassword(e.target.value)}}
           value={props.logInPassword}
           placeholder='Password'
-          type='text'
+          type='Password'
         />
         <div>
           <button id='logInBtn' onClick={() => {props.logIn()}}>
