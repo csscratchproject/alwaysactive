@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 function LogIn(props) {
   return (
     <div>
-      <h1>Log In</h1>
+      {/* <h1>Log In</h1> */}
       <div>
         <input id='inputBox'
           onChange={(e) => {props.setLogInUsername(e.target.value)}}

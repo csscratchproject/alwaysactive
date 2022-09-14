@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import SignUp from './SignUp';
-import LogIn from './LogIn';
-import TestLogin from './TestLogin';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import SignUp from "./SignUp";
+import LogIn from "./LogIn";
+import TestLogin from "./TestLogin";
 
 function SignUpLogInPage(props) {
-  const [signUpUsername, setSignUpUsername] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [logInUsername, setLogInUsername] = useState('');
-  const [logInPassword, setLogInPassword] = useState('');
+  const [signUpUsername, setSignUpUsername] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [logInUsername, setLogInUsername] = useState("");
+  const [logInPassword, setLogInPassword] = useState("");
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignUpFormVisible, setIsSignUpFormVisible] = useState(true);
 
   // const { state } = useLocation();
 
@@ -35,23 +36,23 @@ function SignUpLogInPage(props) {
     e.preventDefault();
     const username = signUpUsername;
     const password = signUpPassword;
-    const method = 'POST';
+    const method = "POST";
     if (username && password) {
-      fetch('/signup', {
+      fetch("/signup", {
         method,
         body: JSON.stringify({ username: username, password: password }),
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       })
         .then((data) => data.json())
         .then((data) => {
           if (data === true) {
-            setSignUpUsername('');
-            setSignUpPassword('');
+            setSignUpUsername("");
+            setSignUpPassword("");
             setIsSignedIn(true);
-            navigate('/HomePage', { state: username });
+            navigate("/HomePage", { state: username });
           } else {
-            setSignUpUsername('');
-            setSignUpPassword('');
+            setSignUpUsername("");
+            setSignUpPassword("");
           }
         })
         .catch((err) => console.log(err));
@@ -61,49 +62,82 @@ function SignUpLogInPage(props) {
   const logIn = () => {
     const username = logInUsername;
     const password = logInPassword;
-    const method = 'POST';
-    fetch('/login', {
+    const method = "POST";
+    fetch("/login", {
       method,
       body: JSON.stringify({ username: username, password: password }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
       .then((data) => {
         if (data === true) {
-          setLogInUsername('');
-          setLogInPassword('');
+          setLogInUsername("");
+          setLogInPassword("");
           setIsSignedIn(true);
-          navigate('/HomePage', { state: username });
+          navigate("/HomePage", { state: username });
         } else {
-          setLogInUsername('');
-          setLogInPassword('');
+          setLogInUsername("");
+          setLogInPassword("");
         }
       })
       .catch((err) => console.log(err));
   };
 
   const deleteUser = (username) => {
-    fetch('/deleteUser', {
-      method: 'POST',
+    fetch("/deleteUser", {
+      method: "POST",
       body: JSON.stringify({ username }),
-      headers: { 'Content-Type': 'application/json'},
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data === true) console.log('user deleted successful');
-        else console.log('no username was deleted');
+        if (data === true) console.log("user deleted successful");
+        else console.log("no username was deleted");
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div id='modalContainer'>
+    <div id="modalContainer">
       <div id="modal">
-        <div><SignUp signUpUsername={signUpUsername} signUpPassword={signUpPassword} updateSignUpUsername={updateSignUpUsername} updateSignUpPassword={updateSignUpPassword} saveUser={saveUser} /></div>
-        {/* <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} updateLogInUsername={updateLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div> */}
-        {/* <div><LogIn logInUsername={logInUsername} logInPassword={logInPassword} setLogInUsername={setLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div> */}
-        <div><TestLogin logInUsername={logInUsername} logInPassword={logInPassword} setLogInUsername={setLogInUsername} updateLogInPassword={updateLogInPassword} logIn={logIn} /></div>
-        <button type='button' id='deleteBtn' onClick={() => deleteUser(signUpUsername)}>Delete user account</button>
+        <div className="form-tabs">
+          <h2
+            onClick={() => setIsSignUpFormVisible(true)}
+            className={isSignUpFormVisible ? "selected-tab" : ""}
+          >
+            Sign Up
+          </h2>
+          <h2
+            onClick={() => setIsSignUpFormVisible(false)}
+            className={isSignUpFormVisible ? "" : "selected-tab"}
+          >
+            Log In
+          </h2>
+        </div>
+        {isSignUpFormVisible ? (
+          <SignUp
+            signUpUsername={signUpUsername}
+            signUpPassword={signUpPassword}
+            updateSignUpUsername={updateSignUpUsername}
+            updateSignUpPassword={updateSignUpPassword}
+            saveUser={saveUser}
+          />
+        ) : (
+          <TestLogin
+            logInUsername={logInUsername}
+            logInPassword={logInPassword}
+            setLogInUsername={setLogInUsername}
+            updateLogInPassword={updateLogInPassword}
+            logIn={logIn}
+          />
+        )}
+        <button
+          type="button"
+          id="deleteBtn"
+          onClick={() => deleteUser(signUpUsername)}
+        >
+          Delete user account
+        </button>
       </div>
     </div>
   );

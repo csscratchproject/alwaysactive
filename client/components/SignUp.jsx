@@ -3,7 +3,7 @@ import React from 'react';
 function SignUp(props) {
   return (
     <div>
-      <h1>Sign Up</h1>
+      {/* <h1>Sign Up</h1> */}
       <form>
         <input
           id="inputBox"
