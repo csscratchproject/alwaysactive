@@ -1,11 +1,8 @@
-import React, { Component, useState } from 'react';
-import { render } from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SideBarContainer from './SideBarContainer';
 import EventsContainer from './EventsContainer';
-import { useLocation } from 'react-router-dom';
 import EventBox from '../components/EventBox';
-
-let counter = 0;
 
 function HomePage(props) {
   const { state } = useLocation();
@@ -14,6 +11,10 @@ function HomePage(props) {
   const [eventSaved, setEventSaved] = useState(false);
 
   const events = [];
+
+  useEffect(() => {
+    getEvents();
+  }, [])
 
   const getEvents = async () => {
     const response = await fetch('/events', {method: 'PUT', body: JSON.stringify({username: state}), headers: { 'Content-Type': 'application/json' } });
@@ -37,15 +38,10 @@ function HomePage(props) {
     setEventsArr(newArr);
   };
 
-  while (counter < 1) {
-    getEvents();
-    counter += 1;
-  }
-
   for (let i = 0; i < eventsArr.length; i += 1) {
     const dateObj = new Date(eventsArr[i].time);
     events.push(<EventBox
-      key={i}
+      key={`EventBox ${i}`}
       index={i}
       name={eventsArr[i].name}
       city={eventsArr[i].city}

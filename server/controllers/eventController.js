@@ -46,6 +46,7 @@ const eventController = {
   },
 
   filterEvents: (req, res, next) => {
+    console.log(req.body)
     const sql = 'SELECT e.*, COUNT(r._id), CASE WHEN EXISTS (SELECT * FROM rsvp r WHERE r.event_id = e._id AND r.username = $1) THEN TRUE ELSE FALSE END userStatus FROM events e LEFT JOIN rsvp r ON e._id = r.event_id WHERE e.city = $2 AND e.state = $3 GROUP BY e._id ORDER BY e.time ASC;';
     db.query(
       sql,

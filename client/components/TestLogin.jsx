@@ -19,8 +19,8 @@ function TestLogin(props) {
           required
           onChange={(e) => {props.updateLogInPassword(e.target.value)}}
         />
-        <button id="logInBtn" type="submit" onClick={() => {props.logIn()}}>Log In</button>
       </form>
+      <button id="logInBtn" type="submit" onClick={() => {props.logIn()}}>Log In</button>
     </div>
 
   );

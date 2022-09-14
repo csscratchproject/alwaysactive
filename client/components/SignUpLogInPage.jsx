@@ -31,33 +31,31 @@ function SignUpLogInPage(props) {
     setLogInPassword(input);
   };
 
-  const saveUser = () => {
-    // const username = signUpUsername;
-    // const password = signUpPassword;
-    // const method = 'POST';
-    // console.log(username)
-    // console.log(password)
-    console.log('why is this')
-    // if (!username && !password) {
-      // fetch('/signup', {
-      //   method,
-      //   body: JSON.stringify({ username: username, password: password }),
-      //   headers: { 'Content-Type': 'application/json' },
-      // })
-      //   .then((data) => data.json())
-      //   .then((data) => {
-      //     if (data === true) {
-      //       setSignUpUsername('');
-      //       setSignUpPassword('');
-      //       setIsSignedIn(true);
-      //       navigate('/HomePage', { state: username });
-      //     } else {
-      //       setSignUpUsername('');
-      //       setSignUpPassword('');
-      //     }
-      //   })
-      //   .catch((err) => console.log(err));
-    // }
+  const saveUser = (e) => {
+    e.preventDefault();
+    const username = signUpUsername;
+    const password = signUpPassword;
+    const method = 'POST';
+    if (username && password) {
+      fetch('/signup', {
+        method,
+        body: JSON.stringify({ username: username, password: password }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then((data) => data.json())
+        .then((data) => {
+          if (data === true) {
+            setSignUpUsername('');
+            setSignUpPassword('');
+            setIsSignedIn(true);
+            navigate('/HomePage', { state: username });
+          } else {
+            setSignUpUsername('');
+            setSignUpPassword('');
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const logIn = () => {
